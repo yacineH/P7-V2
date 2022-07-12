@@ -51,48 +51,48 @@ function persistPost(post) {
   })
 }
 
-function deletePost(id, empId) {
-  const token = window.localStorage.getItem('token')
-  var chemin = new URL(URL_ALLPOSTS + '/' + id)
+// function deletePost(id, empId) {
+//   const token = window.localStorage.getItem('token')
+//   var chemin = new URL(URL_ALLPOSTS + '/' + id)
 
-  return fetch(chemin, {
-    method: 'DELETE',
-    headers: {
-      Authorization: `Bearer ${token}`,
-    },
-  }).then((res) => {
-    res.json()
-  })
-}
+//   return fetch(chemin, {
+//     method: 'DELETE',
+//     headers: {
+//       Authorization: `Bearer ${token}`,
+//     },
+//   }).then((res) => {
+//     res.json()
+//   })
+// }
 
-function updatePost(post) {
-  const token = window.localStorage.getItem('token')
-  const formData = new FormData()
+// function updatePost(post) {
+//   const token = window.localStorage.getItem('token')
+//   const formData = new FormData()
 
-  formData.append(
-    'post',
-    JSON.stringify({
-      employeeId: post.employeeId,
-      title: post.title,
-      message: post.message,
-    })
-  )
+//   formData.append(
+//     'post',
+//     JSON.stringify({
+//       employeeId: post.employeeId,
+//       title: post.title,
+//       message: post.message,
+//     })
+//   )
 
-  //doit etre le meme nom image dans la config de multer
-  if (post.image) formData.append('image', post.image)
+//   //doit etre le meme nom image dans la config de multer
+//   if (post.image) formData.append('image', post.image)
 
-  var chemin = new URL(URL_ALLPOSTS + '/' + post._id)
+//   var chemin = new URL(URL_ALLPOSTS + '/' + post._id)
 
-  return fetch(chemin, {
-    method: 'PUT',
-    headers: {
-      Authorization: `Bearer ${token}`,
-    },
-    body: formData,
-  }).then((res) => {
-    res.json()
-  })
-}
+//   return fetch(chemin, {
+//     method: 'PUT',
+//     headers: {
+//       Authorization: `Bearer ${token}`,
+//     },
+//     body: formData,
+//   }).then((res) => {
+//     res.json()
+//   })
+// }
 
 function fetchLike(id, vote, idEmployee) {
   const token = window.localStorage.getItem('token')
@@ -116,4 +116,5 @@ function fetchLike(id, vote, idEmployee) {
     .catch((err) => console.log(err))
 }
 
-export { persistPost, updatePost, deletePost, fetchLike }
+//export {findPosts,findPost , persistPost, updatePost, deletePost, fetchLike }
+export { persistPost, fetchLike }

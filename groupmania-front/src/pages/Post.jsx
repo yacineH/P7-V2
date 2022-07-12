@@ -3,7 +3,6 @@ import { useParams, useHistory } from 'react-router-dom'
 
 import Header from '../components/Header'
 import Footer from '../components/Footer'
-import { deletePost, updatePost } from '../services/postAPI'
 import AdminContext from '../contexts/adminContext'
 import EmployeeContext from '../contexts/employeeContext'
 import Like from '../components/Like'
@@ -50,13 +49,14 @@ export default function Post() {
 
   const handleDelete = async (event) => {
     event.preventDefault()
-    try {
-      await deletePost(currentPost._id, employeeId).then(() =>
-        history.replace('/home')
-      )
-    } catch (error) {
-      console.log(error)
-    }
+
+    await doFetch({
+      method: 'delete',
+      headers: {
+        Authorization: 'Bearer ' + getToken(),
+      },
+    })
+    history.replace('/home')
   }
 
   const handleChange = (event) => {
@@ -80,11 +80,19 @@ export default function Post() {
   const handleUpdate = async (event) => {
     event.preventDefault()
 
-    try {
-      await updatePost(currentPost).then(() => history.replace('/home'))
-    } catch (error) {
-      console.log(error)
-    }
+    await doFetch({
+      method: 'put',
+      headers: {
+        Authorization: 'Bearer ' + getToken(),
+      },
+      data: {
+        employeeId: currentPost.employeeId,
+        title: currentPost.title,
+        message: currentPost.message,
+        image: currentPost.image,
+      },
+    })
+    history.replace('/home')
   }
 
   const handleCallBack = async (name) => {
