@@ -43,7 +43,10 @@ export default function Post() {
       setCurrentLikes(currentPost.likes)
       setCurrentDislikes(currentPost.dislikes)
     }
-  }, [response, currentPost])
+    if (error) {
+      console.log(error)
+    }
+  }, [response, currentPost, error])
 
   const handleDelete = async (event) => {
     event.preventDefault()
