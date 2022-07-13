@@ -40,14 +40,23 @@ export default function Post() {
 
   useEffect(() => {
     if (response) {
-      setCurrentPost(response)
-      setCurrentLikes(currentPost.likes)
-      setCurrentDislikes(currentPost.dislikes)
+      if (
+        response.message === 'Post supprimé !' ||
+        response.message === 'Post modifié !'
+      ) {
+        console.log('yacine update', response)
+        history.push('/home')
+      } else {
+        console.log('yacine get', response)
+        setCurrentPost(response)
+        setCurrentLikes(currentPost.likes)
+        setCurrentDislikes(currentPost.dislikes)
+      }
     }
     if (error) {
       console.log(error)
     }
-  }, [response, currentPost, error])
+  }, [response, error, history, currentPost.likes, currentPost.dislikes])
   //#endregion
 
   //#region events
@@ -60,7 +69,6 @@ export default function Post() {
         Authorization: 'Bearer ' + getToken(),
       },
     })
-    history.replace('/home')
   }
 
   const handleChange = (event) => {
@@ -83,20 +91,27 @@ export default function Post() {
 
   const handleUpdate = async (event) => {
     event.preventDefault()
-
-    await doFetch({
-      method: 'put',
-      headers: {
-        Authorization: 'Bearer ' + getToken(),
-      },
-      data: {
+    var formData = new FormData()
+    formData.append(
+      'post',
+      JSON.stringify({
         employeeId: currentPost.employeeId,
         title: currentPost.title,
         message: currentPost.message,
-        image: currentPost.image,
+      })
+    )
+    if (currentPost.image) {
+      formData.append('image', currentPost.image)
+    }
+    await doFetch({
+      method: 'put',
+      data: formData,
+      headers: {
+        Authorization: 'Bearer ' + getToken(),
+        'Content-Type': 'multipart/form-data',
+        Accept: '*/*',
       },
     })
-    history.replace('/home')
   }
 
   const handleCallBack = async (name) => {

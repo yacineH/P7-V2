@@ -10,6 +10,7 @@ import ButtonComp from '../components/ButtonComp'
 
 import useFetch from '../hooks/useFetch'
 import { URL_ALLPOSTS, getToken } from '../utils/config'
+import { useEffect } from 'react'
 
 //#region Style
 
@@ -98,26 +99,49 @@ function NewPost() {
 
   const handleSubmit = async (event) => {
     event.preventDefault()
+    var formData = new FormData()
+    formData.append(
+      'post',
+      JSON.stringify({
+        employeeId: currentPost.employeeId,
+        title: currentPost.title,
+        message: currentPost.message,
+      })
+    )
+    if (currentPost.image) {
+      formData.append('image', currentPost.image)
+    }
     await doFetch({
       method: 'post',
+      data: formData,
       headers: {
         Authorization: 'Bearer ' + getToken(),
-        data: {
-          employeeId: currentPost.employeeId,
-          title: currentPost.title,
-          message: currentPost.message,
-          image: currentPost.image,
-        },
+        'Content-Type': 'multipart/form-data',
+        Accept: '*/*',
       },
     })
+
     if (response) {
+      console.log('je suis dans response')
       history.replace('home')
     }
 
     if (error) {
+      console.log('je suis dans error')
       console.log(error)
     }
   }
+  //#endregion
+
+  //#region hook
+  useEffect(() => {
+    if (response) {
+      history.replace('home')
+    }
+    if (error) {
+      console.log(error)
+    }
+  }, [doFetch, response, error, history])
   //#endregion
 
   //#region render
