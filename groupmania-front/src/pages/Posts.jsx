@@ -12,6 +12,7 @@ import colors from '../utils/colors'
 import useFetch from '../hooks/useFetch'
 import { getToken, URL_ALLPOSTS } from '../utils/config'
 
+//#region style
 const DivNewPost = styled.div`
   display: flex;
   justify-content: end;
@@ -34,15 +35,17 @@ const DivPost = styled.div`
   flex-direction: column;
   flex-wrap: wrap;
 `
-
+//#endregion
 export default function Posts() {
+  //#region declaration
   const [posts, setPosts] = useState([])
   const [pageNumber, setPageNumber] = useState(1)
   const [totalPages, setTotalPages] = useState(10)
   const [{ response, error, isLoading }, doFetch] = useFetch(
     URL_ALLPOSTS + '/all/' + pageNumber
   )
-
+  //#endregion
+  //#region hook
   useEffect(() => {
     doFetch({
       method: 'get',
@@ -61,7 +64,8 @@ export default function Posts() {
       console.log(error)
     }
   }, [response, error])
-
+  //#endregion
+  //#region render
   return (
     <div>
       <Header />
@@ -106,4 +110,5 @@ export default function Posts() {
       <Footer />
     </div>
   )
+  //#endregion
 }

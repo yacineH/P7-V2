@@ -9,6 +9,8 @@ import styled from 'styled-components'
 import colors from '../utils/colors'
 import ButtonComp from '../components/ButtonComp'
 
+//#region Style
+
 const StyledForm = styled.form`
   margin-bottom: 200px;
   margin-top: 80px;
@@ -55,8 +57,9 @@ const StyledDivButton = styled.div`
   padding-top: 50px;
   padding-bottom: 50px;
 `
-
+//#endregion
 function NewPost() {
+  //#region declaration
   const history = useHistory()
   const { employeeId } = useContext(EmployeeContext)
 
@@ -68,7 +71,9 @@ function NewPost() {
   })
 
   const [imageLocale, setImageLocale] = useState(NonImage)
+  //#endregion
 
+  //#region events
   const handleChange = (event) => {
     const { name, value } = event.target
     if (name === 'image') {
@@ -97,7 +102,9 @@ function NewPost() {
       console.log(error)
     }
   }
+  //#endregion
 
+  //#region render
   return (
     <div>
       <Header />
@@ -181,5 +188,7 @@ function NewPost() {
       <Footer />
     </div>
   )
+  //#endregion
 }
+
 export default NewPost

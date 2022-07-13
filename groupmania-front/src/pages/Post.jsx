@@ -13,6 +13,7 @@ import useFetch from '../hooks/useFetch'
 import { URL_ALLPOSTS, getToken } from '../utils/config'
 
 export default function Post() {
+  //#region declaration
   const history = useHistory()
   const { isAdmin } = useContext(AdminContext)
   const { employeeId } = useContext(EmployeeContext)
@@ -26,7 +27,8 @@ export default function Post() {
   const [{ response, error, isLoading }, doFetch] = useFetch(
     URL_ALLPOSTS + '/' + id
   )
-
+  //#endregion
+  //#region hook
   useEffect(() => {
     doFetch({
       method: 'get',
@@ -46,7 +48,9 @@ export default function Post() {
       console.log(error)
     }
   }, [response, currentPost, error])
+  //#endregion
 
+  //#region events
   const handleDelete = async (event) => {
     event.preventDefault()
 
@@ -120,7 +124,8 @@ export default function Post() {
       }
     }
   }
-
+  //#endregion
+  //#region render
   return (
     <div>
       <Header />
@@ -281,4 +286,5 @@ export default function Post() {
       <Footer />
     </div>
   )
+  //#endregion
 }

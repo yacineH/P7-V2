@@ -13,6 +13,7 @@ import colors from '../utils/colors'
 import useFetch from '../hooks/useFetch'
 import { URL_LOGIN } from '../utils/config'
 
+//#region Style
 const DivLogo = styled.div`
   display: flex;
   justify-content: center;
@@ -34,7 +35,9 @@ const DivBienvenue = styled.div`
   border-bottom-left-radius: 20px;
   text-align: center;
 `
+//#endregion
 export default function Login() {
+  //#region declarations
   const [{ response, error }, doFetch] = useFetch(URL_LOGIN)
   const history = useHistory()
   const [credentiels, setCredentiels] = useState({
@@ -46,7 +49,8 @@ export default function Login() {
   const { setEmployeeId } = useContext(EmployeeContext)
   const [isError, setIsError] = useState(false)
   const msgError = '* Email ou mot de pass incorrect'
-
+  //#endregion
+  //#region events
   const handleChange = (event) => {
     const { name, value } = event.target
     setCredentiels({
@@ -66,7 +70,8 @@ export default function Login() {
       },
     })
   }
-
+  //#endregion
+  //#region hook
   useEffect(() => {
     if (error) setIsError(true)
     else if (response) {
@@ -77,7 +82,8 @@ export default function Login() {
       history.replace('home')
     }
   }, [response, error, setIsAdmin, setIsAuthenticated, setEmployeeId, history])
-
+  //#endregion
+  //#region render
   return (
     <div>
       <DivLogo>
@@ -139,4 +145,5 @@ export default function Login() {
       </DivContainer>
     </div>
   )
+  //#endregion
 }

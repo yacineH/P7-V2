@@ -8,6 +8,7 @@ import colors from '../utils/colors'
 import useFetch from '../hooks/useFetch'
 import { URL_SIGN } from '../utils/config'
 
+//#region style
 const DivLogo = styled.div`
   display: flex;
   justify-content: center;
@@ -41,8 +42,10 @@ const DivMessage = styled.div`
   text-align: center;
   margin-top: 30px;
 `
+//#endregion
 
 export default function NewUser() {
+  //#region declaration
   const [{ response, error }, doFetch] = useFetch(URL_SIGN)
 
   const history = useHistory()
@@ -54,7 +57,8 @@ export default function NewUser() {
 
   const [showMessage, setShowMessage] = useState(false)
   const [message, setMessage] = useState('')
-
+  //#endregion
+  //#region events
   const handleChange = (event) => {
     const { name, value } = event.target
     setCredentiels({
@@ -75,7 +79,8 @@ export default function NewUser() {
       },
     })
   }
-
+  //#endregion
+  //#region hook
   useEffect(() => {
     if (error) {
       setMessage(error.message)
@@ -83,7 +88,8 @@ export default function NewUser() {
     }
     if (response) history.replace('/')
   }, [response, error, history])
-
+  //#endregion
+  //#region render
   return (
     <div>
       <DivLogo>
@@ -152,4 +158,5 @@ export default function NewUser() {
       </div>
     </div>
   )
+  //#endregion
 }
