@@ -3,11 +3,13 @@ import { useHistory } from 'react-router-dom'
 import Header from '../components/Header'
 import EmployeeContext from '../contexts/employeeContext'
 import Footer from '../components/Footer'
-import { persistPost } from '../services/postAPI'
 import NonImage from '../assets/no-image.jpg'
 import styled from 'styled-components'
 import colors from '../utils/colors'
 import ButtonComp from '../components/ButtonComp'
+
+import useFetch from '../hooks/useFetch'
+import { URL_ALLPOSTS, getToken } from '../utils/config'
 
 //#region Style
 
@@ -71,6 +73,8 @@ function NewPost() {
   })
 
   const [imageLocale, setImageLocale] = useState(NonImage)
+
+  const [{ response, error }, doFetch] = useFetch(URL_ALLPOSTS)
   //#endregion
 
   //#region events
@@ -94,11 +98,23 @@ function NewPost() {
 
   const handleSubmit = async (event) => {
     event.preventDefault()
-
-    try {
-      await persistPost(currentPost)
+    await doFetch({
+      method: 'post',
+      headers: {
+        Authorization: 'Bearer ' + getToken(),
+        data: {
+          employeeId: currentPost.employeeId,
+          title: currentPost.title,
+          message: currentPost.message,
+          image: currentPost.image,
+        },
+      },
+    })
+    if (response) {
       history.replace('home')
-    } catch (error) {
+    }
+
+    if (error) {
       console.log(error)
     }
   }
