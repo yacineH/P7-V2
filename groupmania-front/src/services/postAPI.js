@@ -26,30 +26,30 @@ import { URL_ALLPOSTS } from '../utils/config'
 //   }).then((res) => res.json())
 // }
 
-function persistPost(post) {
-  const token = window.localStorage.getItem('token')
-  const formData = new FormData()
+// function persistPost(post) {
+//   const token = window.localStorage.getItem('token')
+//   const formData = new FormData()
 
-  formData.append(
-    'post',
-    JSON.stringify({
-      employeeId: post.employeeId,
-      title: post.title,
-      message: post.message,
-    })
-  )
+//   formData.append(
+//     'post',
+//     JSON.stringify({
+//       employeeId: post.employeeId,
+//       title: post.title,
+//       message: post.message,
+//     })
+//   )
 
-  if (post.image) formData.append('image', post.image)
+//   if (post.image) formData.append('image', post.image)
 
-  return fetch(URL_ALLPOSTS, {
-    method: 'POST',
-    headers: {
-      Accept: '*/*',
-      Authorization: `Bearer ${token}`,
-    },
-    body: formData,
-  })
-}
+//   return fetch(URL_ALLPOSTS, {
+//     method: 'POST',
+//     headers: {
+//       Accept: '*/*',
+//       Authorization: `Bearer ${token}`,
+//     },
+//     body: formData,
+//   })
+// }
 
 // function deletePost(id, empId) {
 //   const token = window.localStorage.getItem('token')
@@ -117,4 +117,4 @@ function fetchLike(id, vote, idEmployee) {
 }
 
 //export {findPosts,findPost , persistPost, updatePost, deletePost, fetchLike }
-export { persistPost, fetchLike }
+export { fetchLike }
