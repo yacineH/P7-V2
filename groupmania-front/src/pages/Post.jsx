@@ -44,10 +44,8 @@ export default function Post() {
         response.message === 'Post supprimé !' ||
         response.message === 'Post modifié !'
       ) {
-        console.log('yacine update', response)
         history.push('/home')
       } else {
-        console.log('yacine get', response)
         setCurrentPost(response)
         setCurrentLikes(currentPost.likes)
         setCurrentDislikes(currentPost.dislikes)
