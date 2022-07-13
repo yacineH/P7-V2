@@ -1,7 +1,7 @@
 import React from 'react'
 import NoImage from '../assets/no-image.jpg'
 import styled from 'styled-components'
-import colors from '../utils/colors'
+import { colors } from '../utils/config'
 
 const CardContainer = styled.div`
   margin: 20px;

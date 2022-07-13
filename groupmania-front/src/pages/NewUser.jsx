@@ -3,10 +3,9 @@ import { useHistory } from 'react-router-dom'
 import Logo from '../assets/dark-logoB.png'
 import styled from 'styled-components'
 import ButtonComp from '../components/ButtonComp'
-import colors from '../utils/colors'
 
 import useFetch from '../hooks/useFetch'
-import { URL_SIGN } from '../utils/config'
+import { URL_SIGN, colors } from '../utils/config'
 
 //#region style
 const DivLogo = styled.div`

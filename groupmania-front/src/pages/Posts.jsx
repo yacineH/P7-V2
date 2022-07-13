@@ -7,10 +7,9 @@ import Footer from '../components/Footer'
 import { BsFillFilePostFill } from 'react-icons/bs'
 import styled from 'styled-components'
 import PaginComp from '../components/PaginComp'
-import colors from '../utils/colors'
 
 import useFetch from '../hooks/useFetch'
-import { getToken, URL_ALLPOSTS } from '../utils/config'
+import { getToken, URL_ALLPOSTS, colors } from '../utils/config'
 
 //#region style
 const DivNewPost = styled.div`

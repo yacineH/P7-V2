@@ -1,6 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
-import colors from '../utils/colors'
+import { colors } from '../utils/config'
 
 const FooterDiv = styled.footer`
   border: 1px solid ${colors.secondary};

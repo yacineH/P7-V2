@@ -5,11 +5,10 @@ import EmployeeContext from '../contexts/employeeContext'
 import Footer from '../components/Footer'
 import NonImage from '../assets/no-image.jpg'
 import styled from 'styled-components'
-import colors from '../utils/colors'
 import ButtonComp from '../components/ButtonComp'
 
 import useFetch from '../hooks/useFetch'
-import { URL_ALLPOSTS, getToken } from '../utils/config'
+import { URL_ALLPOSTS, getToken, colors } from '../utils/config'
 import { useEffect } from 'react'
 
 //#region Style

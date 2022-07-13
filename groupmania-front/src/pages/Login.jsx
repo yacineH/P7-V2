@@ -1,17 +1,15 @@
 import React, { useState, useContext, useEffect } from 'react'
 import { useHistory, Link } from 'react-router-dom'
 
-import { checkAdmin, checkId } from '../services/authAPI'
 import AuthContext from '../contexts/authContext'
 import AdminContext from '../contexts/adminContext'
 import EmployeeContext from '../contexts/employeeContext'
 import Logo from '../assets/dark-logoB.png'
 import styled from 'styled-components'
 import ButtonComp from '../components/ButtonComp'
-import colors from '../utils/colors'
 
 import useFetch from '../hooks/useFetch'
-import { URL_LOGIN } from '../utils/config'
+import { URL_LOGIN, colors, checkAdmin, checkId } from '../utils/config'
 
 //#region Style
 const DivLogo = styled.div`

@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 import { AiOutlineLogout } from 'react-icons/ai'
 import Logo from '../assets/dark-logo.png'
 import styled from 'styled-components'
-import colors from '../utils/colors'
+import { colors } from '../utils/config'
 
 const HeaderDiv = styled.header`
   margin-bottom: 10px;
