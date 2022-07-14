@@ -13,7 +13,7 @@ const FooterDiv = styled.footer`
 export default function Footer() {
   return (
     <FooterDiv>
-      <p>Copyright © 2022-Tous droits résérvés</p>
+      <p>Copyright © 2022-Tous droits réservés</p>
     </FooterDiv>
   )
 }

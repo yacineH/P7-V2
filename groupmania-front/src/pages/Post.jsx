@@ -7,7 +7,6 @@ import AdminContext from '../contexts/adminContext'
 import EmployeeContext from '../contexts/employeeContext'
 import Like from '../components/Like'
 import NoImage from '../assets/no-image.jpg'
-import { fetchLike } from '../services/postAPI'
 
 import useFetch from '../hooks/useFetch'
 import { URL_ALLPOSTS, getToken } from '../utils/config'
@@ -20,9 +19,6 @@ export default function Post() {
   const { id } = useParams()
   const [imageLocale, setImageLocale] = useState(NoImage)
   const [currentPost, setCurrentPost] = useState({})
-
-  const [currentLikes, setCurrentLikes] = useState(0)
-  const [currentDislikes, setCurrentDislikes] = useState(0)
 
   const [{ response, error, isLoading }, doFetch] = useFetch(
     URL_ALLPOSTS + '/' + id
@@ -47,14 +43,12 @@ export default function Post() {
         history.push('/home')
       } else {
         setCurrentPost(response)
-        setCurrentLikes(currentPost.likes)
-        setCurrentDislikes(currentPost.dislikes)
       }
     }
     if (error) {
       console.log(error)
     }
-  }, [response, error, history, currentPost.likes, currentPost.dislikes])
+  }, [response, error, history])
   //#endregion
 
   //#region events
@@ -112,32 +106,8 @@ export default function Post() {
     })
   }
 
-  const handleCallBack = async (name) => {
-    if (name === 'likes') {
-      if (
-        !currentPost.usersLiked.includes(employeeId) &&
-        !currentPost.usersDisliked.includes(employeeId)
-      ) {
-        await fetchLike(id, 1, employeeId)
-        setCurrentLikes(currentLikes + 1)
-      } else if (currentPost.usersLiked.includes(employeeId)) {
-        await fetchLike(id, 0, employeeId)
-        setCurrentLikes(currentLikes - 1)
-      }
-    } else {
-      if (
-        !currentPost.usersLiked.includes(employeeId) &&
-        !currentPost.usersDisliked.includes(employeeId)
-      ) {
-        await fetchLike(id, -1, employeeId)
-        setCurrentDislikes(currentDislikes + 1)
-      } else if (currentPost.usersDisliked.includes(employeeId)) {
-        await fetchLike(id, 0, employeeId)
-        setCurrentDislikes(currentDislikes - 1)
-      }
-    }
-  }
   //#endregion
+
   //#region render
   return (
     <div>
@@ -267,11 +237,7 @@ export default function Post() {
           >
             <div className="col-2"></div>
             <div className="col-4">
-              <Like
-                likes={currentLikes}
-                dislikes={currentDislikes}
-                callBack={handleCallBack}
-              />
+              <Like post={currentPost} />
             </div>
             <div className="col-4">
               <div className="row">
