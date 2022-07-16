@@ -61,31 +61,33 @@ export default function Like({ post }) {
   const handleClick = async (event, type) => {
     event.preventDefault()
 
+    console.log('liked', usersLiked)
+    console.log('disliked', usersDisliked)
     if (type === 'like') {
       if (
-        !post.usersLiked.includes(employeeId) &&
-        !post.usersDisliked.includes(employeeId)
+        !usersLiked.includes(employeeId) &&
+        !usersDisliked.includes(employeeId)
       ) {
         await dataFetch(1)
         setUsersLiked((old) => [...old, employeeId])
-        setLikes(post.likes + 1)
-      } else if (post.usersLiked.includes(employeeId)) {
+        setLikes(likes + 1)
+      } else if (usersLiked.includes(employeeId)) {
         await dataFetch(0)
         setUsersLiked(usersLiked.slice(usersLiked.indexOf(employeeId, 1)))
-        setLikes(post.likes === 0 ? 0 : post.likes - 1)
+        setLikes(likes === 0 ? 0 : likes - 1)
       }
     } else {
       if (
-        !post.usersLiked.includes(employeeId) &&
-        !post.usersDisliked.includes(employeeId)
+        !usersLiked.includes(employeeId) &&
+        !usersDisliked.includes(employeeId)
       ) {
         await dataFetch(-1)
         setUsersDisliked((old) => [...old, employeeId])
-        setDislikes(post.dislikes + 1)
-      } else if (post.usersDisliked.includes(employeeId)) {
+        setDislikes(dislikes + 1)
+      } else if (usersDisliked.includes(employeeId)) {
         await dataFetch(0)
         setDislikes(usersDisliked.slice(usersDisliked.indexOf(employeeId, 1)))
-        setDislikes(post.dislikes === 0 ? 0 : post.dislikes - 1)
+        setDislikes(dislikes === 0 ? 0 : dislikes - 1)
       }
     }
   }
