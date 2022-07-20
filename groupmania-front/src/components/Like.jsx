@@ -61,8 +61,6 @@ export default function Like({ post }) {
   const handleClick = async (event, type) => {
     event.preventDefault()
 
-    console.log('liked', usersLiked)
-    console.log('disliked', usersDisliked)
     if (type === 'like') {
       if (
         !usersLiked.includes(employeeId) &&

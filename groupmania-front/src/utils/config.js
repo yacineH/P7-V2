@@ -19,7 +19,7 @@ export const getToken = () => {
 }
 
 export function isAuth() {
-  const token = window.localStorage.getItem('token')
+  const token = getToken()
   if (token) {
     const { exp } = jwtDecode(token)
 
@@ -32,7 +32,7 @@ export function isAuth() {
 }
 
 export function checkAdmin() {
-  const token = window.localStorage.getItem('token')
+  const token = getToken()
   if (token) {
     return jwtDecode(token).employee.admin
   }
@@ -40,7 +40,7 @@ export function checkAdmin() {
 }
 
 export function checkId() {
-  const token = window.localStorage.getItem('token')
+  const token = getToken()
   let id = ''
   if (token) {
     id = jwtDecode(token).employee.id

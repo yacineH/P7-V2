@@ -121,12 +121,10 @@ function NewPost() {
     })
 
     if (response) {
-      console.log('je suis dans response')
       history.replace('home')
     }
 
     if (error) {
-      console.log('je suis dans error')
       console.log(error)
     }
   }

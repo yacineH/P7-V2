@@ -73,10 +73,10 @@ export default function Login() {
   useEffect(() => {
     if (error) setIsError(true)
     else if (response) {
+      window.localStorage.setItem('token', response.token)
       setIsAdmin(checkAdmin)
       setIsAuthenticated(true)
       setEmployeeId(checkId)
-      window.localStorage.setItem('token', response.token)
       history.replace('home')
     }
   }, [response, error, setIsAdmin, setIsAuthenticated, setEmployeeId, history])
