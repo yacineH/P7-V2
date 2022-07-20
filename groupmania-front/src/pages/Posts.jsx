@@ -25,6 +25,10 @@ const StyledLink = styled(Link)`
   color: ${colors.tertiare};
   font-size: 18px;
   text-decoration: none;
+  &:hover {
+    color: ${colors.tertiare};
+    text-decoration: none;
+  }
 `
 const DivContent = styled.div`
   margin-bottom: 100px;

@@ -21,6 +21,10 @@ const StylledLink = styled(Link)`
   text-decoration: none;
   font-size: 20px;
   margin-right: 15px;
+  &:hover {
+    color: ${colors.tertiare};
+    text-decoration: none;
+  }
 `
 
 export default function Header() {
