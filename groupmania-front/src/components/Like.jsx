@@ -96,6 +96,7 @@ export default function Like({ post }) {
       <StyledDiv>
         <span>{likes}</span>
         <StyledButton
+          aria-label="button-like"
           name="like"
           onClick={(event) => handleClick(event, 'like')}
         >
@@ -105,6 +106,7 @@ export default function Like({ post }) {
       <StyledDiv>
         <span>{dislikes}</span>
         <StyledButton
+          aria-label="button-dislike"
           name="dislike"
           onClick={(event) => handleClick(event, 'dislike')}
         >

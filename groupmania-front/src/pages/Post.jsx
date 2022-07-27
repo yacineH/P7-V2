@@ -20,6 +20,17 @@ export default function Post() {
   const [imageLocale, setImageLocale] = useState(NoImage)
   const [currentPost, setCurrentPost] = useState({})
 
+  const styleButton = {
+    color: 'black',
+    backgroundColor: '#fd2d01',
+    width: '150px',
+    height: '45px',
+    borderRadius: '15px',
+    border: '1px solid #ffd7d7',
+    fontSize: '18px',
+    fontWeight: 'bold',
+  }
+
   const [{ response, error, isLoading }, doFetch] = useFetch(
     URL_ALLPOSTS + '/' + id
   )
@@ -243,14 +254,14 @@ export default function Post() {
               <div className="row">
                 <div className="col-6">
                   {(isAdmin || currentPost.employeeId === employeeId) && (
-                    <button className="btn btn-primary" onClick={handleUpdate}>
+                    <button style={styleButton} onClick={handleUpdate}>
                       Update
                     </button>
                   )}
                 </div>
                 <div className="col-6">
                   {(isAdmin || currentPost.employeeId === employeeId) && (
-                    <button className="btn btn-danger" onClick={handleDelete}>
+                    <button style={styleButton} onClick={handleDelete}>
                       Delete
                     </button>
                   )}
